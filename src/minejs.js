@@ -1,11 +1,7 @@
-// Add module paths
-require.paths.unshift(__dirname);
-require.paths.unshift(__dirname + '/../');
 
-var sys = require('sys'),
-    fs = require('fs'),
+var fs = require('fs'),
     http = require('http'),
-	url = require('url'),
+    url = require('url'),
     util = require('util');
 
 
@@ -22,7 +18,7 @@ Array.prototype.has = function(v) {
 var version = "0.0.1";
 
 // Load configuration
-var config = require('config').config;
+var config = require('../config').config;
 
 // Create global logger
 var Log = require('log');
