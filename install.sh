@@ -20,6 +20,7 @@ function main() {
     elif(cat /proc/version | grep debian); then
         #Debian Linux
         echo -e "u r on Debian? well apt is anyway already running. =p"
+            apt-get remove nodejs
             apt-get install sun-java6-bin apache2 libapache2-mod-php5 git libssl0.9.8 isomd5sum
             runInstallTasks
     else
@@ -54,6 +55,7 @@ function installNodeJS () {
     cd /opt/nodejs/src
     git clone --depth 1 git://github.com/joyent/node.git
     cd node
+    git checkout v0.6.17
     export JOBS=2 # optional, sets number of parallel commands.
     mkdir ~/local
     ./configure --prefix=/opt/nodejs
@@ -61,7 +63,14 @@ function installNodeJS () {
     make install
     #echo 'export PATH=$HOME/local/node/bin:$PATH' >> ~/.profile
     ln -s /opt/nodejs/bin/node /usr/bin/node
+    ln -s /opt/nodejs/bin/node-waf /usr/bin/node-waf
     #source ~/.profile
+    export PATH=$PATH:/opt/node/bin
+    
+    #install npm
+    wget http://npmjs.org/install.sh
+    chmod +x install.sh
+    ./install.sh
     
     #create logs, user logic has to be implemented cuz of security
     touch /opt/mcserver/server.log
@@ -82,9 +91,8 @@ function installmineJS () {
     cd /opt
     git clone --depth 1 git://github.com/escii/minejs.git
     ln -s /opt/minejs/htdocs /var/www/minejs
-    
     cp /opt/minejs/config.js.example /opt/minejs/config.js
-    cp /opt/minejs/htdocs/include/settings.inc.php.example /opt/minejs/htdocs/include/settings.inc.php
+    #cp /opt/minejs/htdocs/include/settings.inc.php.example /opt/minejs/htdocs/include/settings.inc.php
     echo -e "\n mineJS installed \n\n"
 }
 
