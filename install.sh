@@ -90,7 +90,7 @@ function installmineJS () {
    
     cd /opt
     git clone --depth 1 git://github.com/escii/minejs.git
-    ln -s /opt/minejs/htdocs /var/www/minejs
+    #ln -s /opt/minejs/htdocs /var/www/minejs
     cp /opt/minejs/config.js.example /opt/minejs/config.js
     #cp /opt/minejs/htdocs/include/settings.inc.php.example /opt/minejs/htdocs/include/settings.inc.php
     echo -e "\n mineJS installed \n\n"
@@ -98,7 +98,7 @@ function installmineJS () {
 
 function startAll() {
     cd /opt/minejs/
-    /usr/bin/node /opt/minejs/mine.js
+    /usr/bin/node /opt/minejs/server.sh
     #ask if should restart apache
 }
 
